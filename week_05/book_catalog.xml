@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog>
     <book id="B001">
-        <title>The Great Gatsby</title>
-        <author>F. Scott Fitzgerald</author>
+        <title>The Catcher in the Rye</title>
+        <author>J.D. Salinger</author>
         <genre>Fiction</genre>
-        <price currency="USD">10.99</price>
-        <availability status="in-stock">15</availability>
+        <price currency="USD">9.99</price>
+        <availability status="in-stock">12</availability>
     </book>
 
     <book id="B002">
-        <title>A Brief History of Time</title>
-        <author>Stephen Hawking</author>
+        <title>The Gene: An Intimate History</title>
+        <author>Siddhartha Mukherjee</author>
         <genre>Science</genre>
-        <price currency="USD">15.50</price>
-        <availability status="in-stock">8</availability>
+        <price currency="USD">17.50</price>
+        <availability status="in-stock">6</availability>
     </book>
 
     <book id="B003">
-        <title>Clean Code</title>
-        <author>Robert C. Martin</author>
+        <title>The Pragmatic Programmer</title>
+        <author>David Thomas</author>
         <genre>Technology</genre>
-        <price currency="USD">32.00</price>
-        <availability status="in-stock">23</availability>
+        <price currency="USD">35.00</price>
+        <availability status="in-stock">18</availability>
     </book>
 
     <book id="B004">
-        <title>To Kill a Mockingbird</title>
-        <author>Harper Lee</author>
+        <title>Brave New World</title>
+        <author>Aldous Huxley</author>
         <genre>Fiction</genre>
-        <price currency="USD">12.99</price>
+        <price currency="USD">11.99</price>
         <availability status="out-of-stock">0</availability>
     </book>
 
     <book id="B005">
-        <title>Sapiens: A Brief History of Humankind</title>
-        <author>Yuval Noah Harari</author>
+        <title>Guns, Germs, and Steel</title>
+        <author>Jared Diamond</author>
         <genre>History</genre>
-        <price currency="USD">18.75</price>
-        <availability status="in-stock">5</availability>
+        <price currency="USD">16.50</price>
+        <availability status="in-stock">9</availability>
     </book>
 </catalog>
