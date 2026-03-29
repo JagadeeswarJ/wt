@@ -8,41 +8,41 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	var bookData = {
-		'clean-code': {
-			title: 'Clean Code',
-			author: 'Robert C. Martin',
-			category: 'Technology / Programming',
-			price: '$20',
-			isbn: '978-0132350884',
+		'dune': {
+			title: 'Dune',
+			author: 'Frank Herbert',
+			category: 'Science Fiction',
+			price: '$14',
+			isbn: '978-0441013593',
 			availability: 'In Stock',
-			description: 'A handbook of agile software craftsmanship focusing on writing clean, maintainable code.'
+			description: 'A sweeping epic set on the desert planet Arrakis, exploring politics, religion, and ecology through the journey of Paul Atreides.'
 		},
-		'alchemist': {
-			title: 'The Alchemist',
-			author: 'Paulo Coelho',
-			category: 'Fiction',
-			price: '$12',
-			isbn: '978-0061122415',
+		'educated': {
+			title: 'Educated',
+			author: 'Tara Westover',
+			category: 'Biography / Memoir',
+			price: '$16',
+			isbn: '978-0399590504',
 			availability: 'In Stock',
-			description: 'A novel about a shepherd boy on a journey to realize his personal legend.'
+			description: 'A memoir about a woman who grows up in a survivalist family in Idaho and goes on to earn a PhD from Cambridge University.'
 		},
-		'atomic-habits': {
-			title: 'Atomic Habits',
-			author: 'James Clear',
-			category: 'Self Help',
-			price: '$15',
-			isbn: '978-0735211292',
+		'midnight-library': {
+			title: 'The Midnight Library',
+			author: 'Matt Haig',
+			category: 'Literary Fiction',
+			price: '$13',
+			isbn: '978-0525559474',
 			availability: 'Limited Stock',
-			description: 'Practical strategies for building good habits and breaking bad ones.'
+			description: 'Between life and death lies a library where every book represents a different life you could have lived.'
 		},
-		'ds-algo': {
-			title: 'Data Structures and Algorithms',
-			author: 'Narasimha Karumanchi',
-			category: 'Computer Science',
-			price: '$25',
-			isbn: '978-8193245279',
+		'project-hail-mary': {
+			title: 'Project Hail Mary',
+			author: 'Andy Weir',
+			category: 'Science Fiction',
+			price: '$17',
+			isbn: '978-0593135204',
 			availability: 'Out of Stock',
-			description: 'Detailed explanations of core data structures and algorithms with interview focus.'
+			description: 'An astronaut wakes up alone in deep space with no memory, tasked with saving Earth from an extinction-level threat.'
 		}
 	};
 

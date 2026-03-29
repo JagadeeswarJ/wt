@@ -1,9 +1,9 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #faf7f2;
+    background-color: #f5f3ff;
     margin: 0;
     padding: 15px;
-    color: #333;
+    color: #1e1b4b;
 }
 
 .details {
@@ -15,9 +15,9 @@ body {
 }
 
 h2 {
-    color: #1a3a3a;
+    color: #2e1065;
     margin-bottom: 10px;
-    border-bottom: 2px solid #0d9488;
+    border-bottom: 2px solid #7c3aed;
     padding-bottom: 5px;
 }
 

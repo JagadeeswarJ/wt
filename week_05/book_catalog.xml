@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <catalog>
     <book id="B001">
-        <title>The Catcher in the Rye</title>
-        <author>J.D. Salinger</author>
-        <genre>Fiction</genre>
-        <price currency="USD">9.99</price>
-        <availability status="in-stock">12</availability>
+        <title>Dune</title>
+        <author>Frank Herbert</author>
+        <genre>Science Fiction</genre>
+        <price currency="USD">14.99</price>
+        <availability status="in-stock">20</availability>
     </book>
 
     <book id="B002">
-        <title>The Gene: An Intimate History</title>
-        <author>Siddhartha Mukherjee</author>
+        <title>The Immortal Life of Henrietta Lacks</title>
+        <author>Rebecca Skloot</author>
         <genre>Science</genre>
-        <price currency="USD">17.50</price>
-        <availability status="in-stock">6</availability>
+        <price currency="USD">13.50</price>
+        <availability status="in-stock">7</availability>
     </book>
 
     <book id="B003">
-        <title>The Pragmatic Programmer</title>
-        <author>David Thomas</author>
+        <title>You Don't Know JS</title>
+        <author>Kyle Simpson</author>
         <genre>Technology</genre>
-        <price currency="USD">35.00</price>
-        <availability status="in-stock">18</availability>
+        <price currency="USD">29.00</price>
+        <availability status="in-stock">14</availability>
     </book>
 
     <book id="B004">
-        <title>Brave New World</title>
-        <author>Aldous Huxley</author>
-        <genre>Fiction</genre>
-        <price currency="USD">11.99</price>
+        <title>The Name of the Wind</title>
+        <author>Patrick Rothfuss</author>
+        <genre>Fantasy</genre>
+        <price currency="USD">16.99</price>
         <availability status="out-of-stock">0</availability>
     </book>
 
     <book id="B005">
-        <title>Guns, Germs, and Steel</title>
-        <author>Jared Diamond</author>
+        <title>The Silk Roads</title>
+        <author>Peter Frankopan</author>
         <genre>History</genre>
-        <price currency="USD">16.50</price>
-        <availability status="in-stock">9</availability>
+        <price currency="USD">21.00</price>
+        <availability status="in-stock">11</availability>
     </book>
 </catalog>

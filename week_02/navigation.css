@@ -1,11 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #fef3c7;
+    background-color: #ede9fe;
     padding: 10px;
 }
 
 h3 {
-    color: #78350f;
+    color: #4c1d95;
 }
 
 ul {
@@ -18,7 +18,7 @@ li {
 
 a {
     text-decoration: none;
-    color: #0d9488;
+    color: #7c3aed;
 }
 
 a:hover {

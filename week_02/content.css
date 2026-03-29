@@ -1,10 +1,10 @@
 /* General page styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #faf7f2;
+    background-color: #f5f3ff;
     margin: 0;
     padding: 15px;
-    color: #333;
+    color: #1e1b4b;
 }
 
 /* Section styling */
@@ -18,9 +18,9 @@ section {
 
 /* Headings */
 h2 {
-    color: #1a3a3a;
+    color: #2e1065;
     margin-bottom: 10px;
-    border-bottom: 2px solid #0d9488;
+    border-bottom: 2px solid #7c3aed;
     padding-bottom: 5px;
 }
 
@@ -41,7 +41,7 @@ table {
 }
 
 th {
-    background-color: #0d9488;
+    background-color: #7c3aed;
     color: white;
     padding: 8px;
 }
@@ -53,7 +53,7 @@ td {
 
 /* Buttons */
 button {
-    background-color: #d97706;
+    background-color: #db2777;
     color: white;
     border: none;
     padding: 6px 12px;
@@ -62,7 +62,7 @@ button {
 }
 
 button:hover {
-    background-color: #b45309;
+    background-color: #be185d;
 }
 
 /* Form styling */

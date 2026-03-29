@@ -1,15 +1,15 @@
 :root{
-  --bg:#faf7f2;
+  --bg:#f5f3ff;
   --card:#ffffff;
   --muted:#6b7280;
-  --accent:#0d9488;
+  --accent:#7c3aed;
   --success:#10b981;
   --danger:#ef4444;
   --glass:rgba(255,255,255,0.6);
 }
 *{box-sizing:border-box}
-body{font-family:Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:#111}
-.site-header{background:linear-gradient(90deg,var(--accent),#d97706);color:white;padding:20px 24px}
+body{font-family:Segoe UI,Roboto,Arial,sans-serif;margin:0;background:var(--bg);color:#1e1b4b}
+.site-header{background:linear-gradient(90deg,var(--accent),#db2777);color:white;padding:20px 24px}
 .site-header h1{margin:0;font-size:1.25rem}
 .container{max-width:1100px;margin:24px auto;padding:0 16px}
 .controls{display:flex;gap:10px;align-items:center;margin-bottom:18px}
