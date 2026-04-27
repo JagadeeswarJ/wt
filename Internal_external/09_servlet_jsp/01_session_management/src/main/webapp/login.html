@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <style>
+    body { font-family: Arial; display: flex; justify-content: center; padding-top: 80px; background: #f0f0f0; }
+    .box { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); width: 300px; }
+    h2 { margin-bottom: 20px; color: #2c3e50; }
+    input[type=text], input[type=password] { width: 100%; padding: 8px; margin: 6px 0 14px; box-sizing: border-box; }
+    button { width: 100%; padding: 10px; background: #2c3e50; color: white; border: none; cursor: pointer; }
+    .error { color: red; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Bookstore Login</h2>
+    <form action="login" method="post">
+      <label>Username</label>
+      <input type="text" name="username" required/>
+      <label>Password</label>
+      <input type="password" name="password" required/>
+      <button type="submit">Login</button>
+      <p class="error">${param.error == '1' ? 'Invalid credentials.' : ''}</p>
+    </form>
+  </div>
+</body>
+</html>

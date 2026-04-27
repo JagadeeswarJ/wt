@@ -1,21 +1,3 @@
-# Week 11 — Hibernate CRUD Operations
-
-Perform CRUD operations using Hibernate for book records.
-
----
-
-## Prerequisites
-
-Same project from Week 10 (`hibernate-entity`).
-No new setup needed — just add one new class to the same package.
-
----
-
-## Step 1 — Add BookCRUD.java
-
-Right-click `com.bookstore` → **New → Class** → name it `BookCRUD`
-
-```java
 package com.bookstore;
 
 import org.hibernate.*;
@@ -94,50 +76,3 @@ public class BookCRUD {
         factory.close();
     }
 }
-```
-
----
-
-## Step 2 — Run
-
-Right-click `BookCRUD.java` → **Run As → Java Application**
-
-Expected Console output:
-```
-Created.
--- After Create --
-1 | Atomic Habits | Rs.399.0
-
-Updated.
--- After Update --
-1 | Atomic Habits | Rs.450.0
-
-Deleted.
--- After Delete --
-(empty)
-```
-
----
-
-## Step 3 — Verify in MySQL
-
-```sql
-USE bookstore;
-SELECT * FROM books;
-```
-
----
-
-## Project Structure (final)
-
-```
-hibernate-entity/
-  src/main/java/com/bookstore/
-    Book.java           <- entity (from Week 10)
-    User.java           <- entity (from Week 10)
-    TestMapping.java    <- Week 10 test
-    BookCRUD.java       <- CRUD operations (Week 11)
-  src/main/resources/
-    hibernate.cfg.xml   <- DB config (from Week 10)
-  pom.xml
-```
