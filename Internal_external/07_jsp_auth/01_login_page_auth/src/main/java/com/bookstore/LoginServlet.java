@@ -34,7 +34,9 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                response.sendRedirect("success.jsp");
+            	HttpSession session = request.getSession();
+                session.setAttribute("user", user);
+                response.sendRedirect("dashboard.jsp");
             } else {
                 response.sendRedirect("error.jsp");
             }

@@ -1,4 +1,12 @@
 <%@ page language="java" %>
+<%
+    String user = (String) session.getAttribute("user");
+    if (user != null) {
+    	session.setAttribute("user", user);
+        response.sendRedirect("dashboard.jsp");
+        return;
+    }
+%>
 <html>
 <head><title>Login</title></head>
 <body>
