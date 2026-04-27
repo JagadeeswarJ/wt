@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookCatalog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="book_catalog.xsd">
+
+  <book id="B001">
+    <title>The Alchemist</title>
+    <author>Paulo Coelho</author>
+    <genre>Fiction</genre>
+    <price currency="INR">299</price>
+    <availability>In Stock</availability>
+  </book>
+
+  <book id="B002">
+    <title>Atomic Habits</title>
+    <author>James Clear</author>
+    <genre>Self Help</genre>
+    <price currency="INR">399</price>
+    <availability>In Stock</availability>
+  </book>
+
+  <book id="B003">
+    <title>Sapiens</title>
+    <author>Yuval Noah Harari</author>
+    <genre>History</genre>
+    <price currency="INR">499</price>
+    <availability>Out of Stock</availability>
+  </book>
+
+</bookCatalog>

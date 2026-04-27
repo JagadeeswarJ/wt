@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart with Quantity</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; }
+    header { background: #2c3e50; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 22px; }
+    #cart-badge { background: #e74c3c; color: white; padding: 5px 12px; border-radius: 20px; font-size: 13px; }
+    .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; display: flex; gap: 20px; }
+    .books { flex: 1; }
+    .books h2 { margin-bottom: 15px; color: #2c3e50; }
+    .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 15px; }
+    .book { background: white; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .book .icon { font-size: 36px; margin-bottom: 8px; }
+    .book h3 { font-size: 13px; color: #2c3e50; margin-bottom: 4px; }
+    .book .price { color: #e74c3c; font-weight: bold; margin: 6px 0; }
+    .book button { background: #2c3e50; color: white; border: none; padding: 7px 0; border-radius: 4px; cursor: pointer; font-size: 13px; width: 100%; }
+    .book button:hover { background: #27ae60; }
+    .cart-panel { width: 320px; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
+    .cart-panel h2 { color: #2c3e50; margin-bottom: 15px; }
+    #empty { color: #aaa; font-size: 13px; text-align: center; padding: 15px 0; }
+    .ci { padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .ci-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 13px; }
+    .ci-title { flex: 1; color: #333; font-weight: bold; }
+    .ci-subtotal { color: #27ae60; font-weight: bold; min-width: 60px; text-align: right; }
+    .qty-ctrl { display: flex; align-items: center; gap: 8px; }
+    .qty-btn { background: #ecf0f1; border: none; width: 26px; height: 26px; border-radius: 4px; font-size: 16px; cursor: pointer; line-height: 1; }
+    .qty-btn:hover { background: #2c3e50; color: white; }
+    .qty-val { font-size: 14px; font-weight: bold; color: #2c3e50; min-width: 20px; text-align: center; }
+    .rm-btn { background: none; border: none; color: #e74c3c; cursor: pointer; font-size: 16px; margin-left: 8px; }
+    .total-row { display: flex; justify-content: space-between; font-weight: bold; font-size: 16px; padding-top: 12px; border-top: 2px solid #2c3e50; margin-top: 10px; color: #2c3e50; }
+    #checkout { width: 100%; margin-top: 12px; background: #27ae60; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 14px; }
+    #checkout:hover { background: #1e8449; }
+  </style>
+</head>
+<body>
+<header>
+  <h1>BookStore - Quantity Cart</h1>
+  <span id="cart-badge">Cart: 0 items</span>
+</header>
+<div class="container">
+  <div class="books">
+    <h2>Books</h2>
+    <div class="book-grid" id="bookGrid"></div>
+  </div>
+  <div class="cart-panel">
+    <h2>Cart</h2>
+    <div id="empty">Cart is empty.</div>
+    <div id="cart-body"></div>
+  </div>
+</div>
+
+<script>
+  const BOOKS = [
+    { id: 1, title: "The Alchemist", price: 299, icon: "&#128218;" },
+    { id: 2, title: "Atomic Habits", price: 399, icon: "&#128214;" },
+    { id: 3, title: "Sapiens", price: 499, icon: "&#128215;" },
+    { id: 4, title: "Deep Work", price: 449, icon: "&#128216;" },
+    { id: 5, title: "1984", price: 280, icon: "&#128217;" },
+    { id: 6, title: "Rich Dad Poor Dad", price: 349, icon: "&#9733;" }
+  ];
+
+  // cart: { id, title, price, qty }[]
+  let cart = JSON.parse(localStorage.getItem('qtyCart') || '[]');
+
+  function save() { localStorage.setItem('qtyCart', JSON.stringify(cart)); }
+
+  function addToCart(id) {
+    const existing = cart.find(i => i.id === id);
+    if (existing) {
+      existing.qty++;
+    } else {
+      const book = BOOKS.find(b => b.id === id);
+      cart.push({ id: book.id, title: book.title, price: book.price, qty: 1 });
+    }
+    save();
+    renderCart();
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+    save();
+    renderCart();
+  }
+
+  function renderCart() {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const count = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cart-badge').textContent = `Cart: ${count} items`;
+    const body = document.getElementById('cart-body');
+
+    if (cart.length === 0) {
+      document.getElementById('empty').style.display = 'block';
+      body.innerHTML = '';
+      return;
+    }
+    document.getElementById('empty').style.display = 'none';
+    body.innerHTML = cart.map(i => `
+      <div class="ci">
+        <div class="ci-top">
+          <span class="ci-title">${i.title}</span>
+          <span class="ci-subtotal">&#8377;${i.price * i.qty}</span>
+          <button class="rm-btn" onclick="changeQty(${i.id}, -${i.qty})">&#10005;</button>
+        </div>
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty(${i.id}, -1)">&#8722;</button>
+          <span class="qty-val">${i.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i.id}, 1)">+</button>
+          <small style="color:#888;font-size:12px;">&#8377;${i.price} each</small>
+        </div>
+      </div>
+    `).join('') + `
+      <div class="total-row"><span>Total</span><span>&#8377;${total}</span></div>
+      <button id="checkout" onclick="checkout()">Place Order</button>
+    `;
+  }
+
+  function checkout() {
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    alert(`Order placed! Total: ₹${total}`);
+    cart = [];
+    save();
+    renderCart();
+  }
+
+  document.getElementById('bookGrid').innerHTML = BOOKS.map(b => `
+    <div class="book">
+      <div class="icon">${b.icon}</div>
+      <h3>${b.title}</h3>
+      <div class="price">&#8377;${b.price}</div>
+      <button onclick="addToCart(${b.id})">+ Add to Cart</button>
+    </div>`).join('');
+
+  renderCart();
+</script>
+</body>
+</html>

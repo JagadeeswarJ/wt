@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Form Validation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .box { background: white; padding: 35px; border-radius: 8px; width: 420px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #2c3e50; margin-bottom: 25px; }
+    .field { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; color: #555; margin-bottom: 4px; font-weight: bold; }
+    input, select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; outline: none; }
+    input:focus, select:focus { border-color: #3498db; }
+    input.invalid { border-color: #e74c3c; }
+    input.valid { border-color: #27ae60; }
+    .err { color: #e74c3c; font-size: 12px; margin-top: 4px; display: block; }
+    button { width: 100%; background: #2c3e50; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 15px; cursor: pointer; margin-top: 5px; }
+    button:hover { background: #3498db; }
+    #success { display: none; text-align: center; color: #27ae60; background: #eafaf1; padding: 15px; border-radius: 5px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>Complete Registration</h2>
+  <form id="mainForm" novalidate>
+
+    <div class="field">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="John Doe">
+      <span class="err" id="nameErr"></span>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="john@example.com">
+      <span class="err" id="emailErr"></span>
+    </div>
+
+    <div class="field">
+      <label>Phone Number</label>
+      <input type="tel" id="phone" placeholder="10-digit number">
+      <span class="err" id="phoneErr"></span>
+    </div>
+
+    <div class="field">
+      <label>Username</label>
+      <input type="text" id="username" placeholder="min 3 characters">
+      <span class="err" id="userErr"></span>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="min 6 characters">
+      <span class="err" id="passErr"></span>
+    </div>
+
+    <div class="field">
+      <label>Confirm Password</label>
+      <input type="password" id="confirm" placeholder="repeat password">
+      <span class="err" id="confErr"></span>
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+  <div id="success">Form submitted successfully!</div>
+</div>
+
+<script>
+  function validate(id, errId, check) {
+    const el = document.getElementById(id);
+    const err = document.getElementById(errId);
+    const msg = check(el.value.trim());
+    err.textContent = msg;
+    el.className = msg ? 'invalid' : 'valid';
+    return !msg;
+  }
+
+  const rules = {
+    name:     v => v.length < 2 ? 'Name must be at least 2 characters.' : '',
+    email:    v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Enter a valid email.',
+    phone:    v => /^\d{10}$/.test(v) ? '' : 'Phone must be exactly 10 digits.',
+    username: v => v.length < 3 ? 'Username must be at least 3 characters.' : '',
+    password: v => v.length < 6 ? 'Password must be at least 6 characters.' : '',
+    confirm:  v => v === document.getElementById('password').value ? '' : 'Passwords do not match.'
+  };
+
+  const pairs = [
+    ['name','nameErr'], ['email','emailErr'], ['phone','phoneErr'],
+    ['username','userErr'], ['password','passErr'], ['confirm','confErr']
+  ];
+
+  pairs.forEach(([id, errId]) => {
+    document.getElementById(id).addEventListener('input', () => {
+      validate(id, errId, rules[id]);
+    });
+  });
+
+  document.getElementById('mainForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const allValid = pairs.every(([id, errId]) => validate(id, errId, rules[id]));
+    if (allValid) {
+      document.getElementById('mainForm').style.display = 'none';
+      document.getElementById('success').style.display = 'block';
+    }
+  });
+</script>
+</body>
+</html>

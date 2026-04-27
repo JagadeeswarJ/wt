@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XML Display</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 30px; }
+    h1 { color: #2c3e50; margin-bottom: 20px; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    th { background: #2c3e50; color: white; padding: 12px 15px; text-align: left; }
+    td { padding: 11px 15px; border-bottom: 1px solid #eee; font-size: 14px; }
+    tr:hover td { background: #f8f9fa; }
+    .in-stock { color: #27ae60; font-weight: bold; }
+    .out-stock { color: #e74c3c; font-weight: bold; }
+    #error { color: #e74c3c; background: #fdecea; padding: 15px; border-radius: 5px; }
+    p.note { color: #888; font-size: 13px; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+  <h1>Book Catalog (from XML)</h1>
+  <p class="note">Data loaded from books.xml using JavaScript XMLHttpRequest / fetch.</p>
+  <div id="output"></div>
+
+<script>
+  // Inline XML as fallback (browsers block local file fetch by default)
+  const xmlString = `<?xml version="1.0" encoding="UTF-8"?>
+<bookCatalog>
+  <book>
+    <title>The Alchemist</title><author>Paulo Coelho</author><genre>Fiction</genre><price>299</price><availability>In Stock</availability>
+  </book>
+  <book>
+    <title>Atomic Habits</title><author>James Clear</author><genre>Self Help</genre><price>399</price><availability>In Stock</availability>
+  </book>
+  <book>
+    <title>Sapiens</title><author>Yuval Noah Harari</author><genre>History</genre><price>499</price><availability>In Stock</availability>
+  </book>
+  <book>
+    <title>1984</title><author>George Orwell</author><genre>Dystopian Fiction</genre><price>280</price><availability>Out of Stock</availability>
+  </book>
+  <book>
+    <title>A Brief History of Time</title><author>Stephen Hawking</author><genre>Science</genre><price>399</price><availability>In Stock</availability>
+  </book>
+</bookCatalog>`;
+
+  function parseAndRender(xmlDoc) {
+    const books = xmlDoc.getElementsByTagName('book');
+    let html = `<table>
+      <tr><th>Title</th><th>Author</th><th>Genre</th><th>Price (&#8377;)</th><th>Availability</th></tr>`;
+    for (let b of books) {
+      const get = tag => b.getElementsByTagName(tag)[0].textContent;
+      const avail = get('availability');
+      const cls = avail === 'In Stock' ? 'in-stock' : 'out-stock';
+      html += `<tr>
+        <td>${get('title')}</td>
+        <td>${get('author')}</td>
+        <td>${get('genre')}</td>
+        <td>&#8377;${get('price')}</td>
+        <td class="${cls}">${avail}</td>
+      </tr>`;
+    }
+    html += '</table>';
+    document.getElementById('output').innerHTML = html;
+  }
+
+  // Try fetch first, fall back to inline XML string
+  fetch('books.xml')
+    .then(r => r.text())
+    .then(text => {
+      const parser = new DOMParser();
+      parseAndRender(parser.parseFromString(text, 'text/xml'));
+    })
+    .catch(() => {
+      const parser = new DOMParser();
+      parseAndRender(parser.parseFromString(xmlString, 'text/xml'));
+    });
+</script>
+</body>
+</html>

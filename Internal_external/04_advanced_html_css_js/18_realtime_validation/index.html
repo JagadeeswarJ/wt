@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Real-Time Form Validation</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+    .box { background: white; padding: 35px; border-radius: 8px; width: 420px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+    h2 { text-align: center; color: #2c3e50; margin-bottom: 5px; }
+    p.sub { text-align: center; color: #888; font-size: 13px; margin-bottom: 25px; }
+    .field { margin-bottom: 18px; }
+    label { display: block; font-size: 13px; color: #555; margin-bottom: 4px; font-weight: bold; }
+    .input-wrap { position: relative; }
+    input { width: 100%; padding: 10px 38px 10px 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 14px; outline: none; transition: border 0.2s; }
+    input:focus { border-color: #3498db; }
+    input.valid { border-color: #27ae60; }
+    input.invalid { border-color: #e74c3c; }
+    .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+    .msg { font-size: 12px; margin-top: 4px; min-height: 16px; }
+    .msg.ok { color: #27ae60; }
+    .msg.err { color: #e74c3c; }
+    .strength-bar { height: 5px; border-radius: 3px; margin-top: 6px; background: #eee; }
+    .strength-fill { height: 100%; border-radius: 3px; transition: width 0.3s, background 0.3s; width: 0; }
+  </style>
+</head>
+<body>
+<div class="box">
+  <h2>Create Account</h2>
+  <p class="sub">All fields validate in real time — no submit needed.</p>
+
+  <div class="field">
+    <label>Username</label>
+    <div class="input-wrap">
+      <input type="text" id="username" placeholder="min 3 characters">
+      <span class="icon" id="uIcon"></span>
+    </div>
+    <p class="msg" id="uMsg"></p>
+  </div>
+
+  <div class="field">
+    <label>Email</label>
+    <div class="input-wrap">
+      <input type="email" id="email" placeholder="you@example.com">
+      <span class="icon" id="eIcon"></span>
+    </div>
+    <p class="msg" id="eMsg"></p>
+  </div>
+
+  <div class="field">
+    <label>Password</label>
+    <div class="input-wrap">
+      <input type="password" id="password" placeholder="min 6 characters">
+      <span class="icon" id="pIcon"></span>
+    </div>
+    <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+    <p class="msg" id="pMsg"></p>
+  </div>
+
+  <div class="field">
+    <label>Confirm Password</label>
+    <div class="input-wrap">
+      <input type="password" id="confirm" placeholder="repeat password">
+      <span class="icon" id="cIcon"></span>
+    </div>
+    <p class="msg" id="cMsg"></p>
+  </div>
+</div>
+
+<script>
+  function setStatus(inputId, iconId, msgId, valid, message) {
+    const inp = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    const msg = document.getElementById(msgId);
+    if (inp.value === '') {
+      inp.className = '';
+      icon.textContent = '';
+      msg.textContent = '';
+      return;
+    }
+    inp.className = valid ? 'valid' : 'invalid';
+    icon.textContent = valid ? '✔' : '✖';
+    icon.style.color = valid ? '#27ae60' : '#e74c3c';
+    msg.textContent = message;
+    msg.className = 'msg ' + (valid ? 'ok' : 'err');
+  }
+
+  document.getElementById('username').addEventListener('input', function() {
+    const ok = this.value.trim().length >= 3;
+    setStatus('username', 'uIcon', 'uMsg', ok, ok ? 'Username looks good!' : 'At least 3 characters required.');
+  });
+
+  document.getElementById('email').addEventListener('input', function() {
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.value.trim());
+    setStatus('email', 'eIcon', 'eMsg', ok, ok ? 'Valid email!' : 'Enter a valid email address.');
+  });
+
+  document.getElementById('password').addEventListener('input', function() {
+    const v = this.value;
+    let strength = 0;
+    if (v.length >= 6) strength++;
+    if (/[A-Z]/.test(v)) strength++;
+    if (/[0-9]/.test(v)) strength++;
+    if (/[^A-Za-z0-9]/.test(v)) strength++;
+    const colors = ['', '#e74c3c', '#e67e22', '#f1c40f', '#27ae60'];
+    const labels = ['', 'Weak', 'Fair', 'Good', 'Strong'];
+    const fill = document.getElementById('strengthFill');
+    fill.style.width = (strength * 25) + '%';
+    fill.style.background = colors[strength] || '#eee';
+    const ok = v.length >= 6;
+    setStatus('password', 'pIcon', 'pMsg', ok, ok ? `Password strength: ${labels[strength]}` : 'At least 6 characters required.');
+    document.getElementById('confirm').dispatchEvent(new Event('input'));
+  });
+
+  document.getElementById('confirm').addEventListener('input', function() {
+    const ok = this.value === document.getElementById('password').value && this.value !== '';
+    setStatus('confirm', 'cIcon', 'cMsg', ok, ok ? 'Passwords match!' : 'Passwords do not match.');
+  });
+</script>
+</body>
+</html>

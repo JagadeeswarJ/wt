@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookCatalog>
+  <book>
+    <title>The Alchemist</title>
+    <author>Paulo Coelho</author>
+    <genre>Fiction</genre>
+    <price>299</price>
+    <availability>In Stock</availability>
+  </book>
+  <book>
+    <title>Atomic Habits</title>
+    <author>James Clear</author>
+    <genre>Self Help</genre>
+    <price>399</price>
+    <availability>In Stock</availability>
+  </book>
+  <book>
+    <title>Sapiens</title>
+    <author>Yuval Noah Harari</author>
+    <genre>History</genre>
+    <price>499</price>
+    <availability>In Stock</availability>
+  </book>
+  <book>
+    <title>1984</title>
+    <author>George Orwell</author>
+    <genre>Dystopian Fiction</genre>
+    <price>280</price>
+    <availability>Out of Stock</availability>
+  </book>
+  <book>
+    <title>A Brief History of Time</title>
+    <author>Stephen Hawking</author>
+    <genre>Science</genre>
+    <price>399</price>
+    <availability>In Stock</availability>
+  </book>
+</bookCatalog>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Root element -->
+  <xs:element name="bookCatalog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="book" type="BookType" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Book type definition -->
+  <xs:complexType name="BookType">
+    <xs:sequence>
+      <xs:element name="title"        type="xs:string"/>
+      <xs:element name="author"       type="xs:string"/>
+      <xs:element name="genre"        type="xs:string"/>
+      <xs:element name="price"        type="PriceType"/>
+      <xs:element name="availability" type="AvailabilityType"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:ID" use="required"/>
+  </xs:complexType>
+
+  <!-- Price with currency attribute -->
+  <xs:complexType name="PriceType">
+    <xs:simpleContent>
+      <xs:extension base="xs:decimal">
+        <xs:attribute name="currency" type="xs:string" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <!-- Availability restricted to allowed values -->
+  <xs:simpleType name="AvailabilityType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="In Stock"/>
+      <xs:enumeration value="Out of Stock"/>
+      <xs:enumeration value="Pre-Order"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

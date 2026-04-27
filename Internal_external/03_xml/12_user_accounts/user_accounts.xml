@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<userAccounts>
+
+  <user id="U001">
+    <username>john_doe</username>
+    <password>john@1234</password>
+    <email>john.doe@example.com</email>
+    <purchaseHistory>
+      <purchase>
+        <orderId>ORD101</orderId>
+        <bookTitle>The Alchemist</bookTitle>
+        <date>2024-01-15</date>
+        <amount>299</amount>
+      </purchase>
+      <purchase>
+        <orderId>ORD102</orderId>
+        <bookTitle>Atomic Habits</bookTitle>
+        <date>2024-02-10</date>
+        <amount>399</amount>
+      </purchase>
+    </purchaseHistory>
+  </user>
+
+  <user id="U002">
+    <username>jane_smith</username>
+    <password>jane@5678</password>
+    <email>jane.smith@example.com</email>
+    <purchaseHistory>
+      <purchase>
+        <orderId>ORD201</orderId>
+        <bookTitle>Sapiens</bookTitle>
+        <date>2024-03-05</date>
+        <amount>499</amount>
+      </purchase>
+    </purchaseHistory>
+  </user>
+
+  <user id="U003">
+    <username>ravi_kumar</username>
+    <password>ravi@9999</password>
+    <email>ravi.kumar@example.com</email>
+    <purchaseHistory>
+      <purchase>
+        <orderId>ORD301</orderId>
+        <bookTitle>Deep Work</bookTitle>
+        <date>2024-03-20</date>
+        <amount>449</amount>
+      </purchase>
+      <purchase>
+        <orderId>ORD302</orderId>
+        <bookTitle>Rich Dad Poor Dad</bookTitle>
+        <date>2024-04-01</date>
+        <amount>349</amount>
+      </purchase>
+    </purchaseHistory>
+  </user>
+
+</userAccounts>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+
+    <user id="U001">
+        <username>alice_reads</username>
+        <password algorithm="sha256">9f4c26b4b7d1e839e87f95e08c1c7b2a4f9d3e6a8c2b5d0f1e4a7c9b3d6f2e5</password>
+        <email>alice@example.com</email>
+        <purchaseHistory>
+            <purchase orderId="ORD001" date="2025-01-10">
+                <item bookId="B001" title="Dune" price="14.99" currency="USD"/>
+            </purchase>
+            <purchase orderId="ORD004" date="2025-03-02">
+                <item bookId="B003" title="You Don't Know JS" price="29.00" currency="USD"/>
+                <item bookId="B005" title="The Silk Roads" price="21.00" currency="USD"/>
+            </purchase>
+        </purchaseHistory>
+    </user>
+
+    <user id="U002">
+        <username>bob_pages</username>
+        <password algorithm="sha256">3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4</password>
+        <email>bob@example.com</email>
+        <purchaseHistory>
+            <purchase orderId="ORD002" date="2025-01-22">
+                <item bookId="B002" title="The Immortal Life of Henrietta Lacks" price="13.50" currency="USD"/>
+            </purchase>
+        </purchaseHistory>
+    </user>
+
+    <user id="U003">
+        <username>carol_shelf</username>
+        <password algorithm="sha256">a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b</password>
+        <email>carol@example.com</email>
+        <purchaseHistory>
+            <purchase orderId="ORD003" date="2025-02-14">
+                <item bookId="B004" title="The Name of the Wind" price="16.99" currency="USD"/>
+                <item bookId="B001" title="Dune" price="14.99" currency="USD"/>
+            </purchase>
+            <purchase orderId="ORD005" date="2025-03-18">
+                <item bookId="B005" title="The Silk Roads" price="21.00" currency="USD"/>
+            </purchase>
+        </purchaseHistory>
+    </user>
+
+    <user id="U004">
+        <username>dan_bookmark</username>
+        <password algorithm="sha256">f0e1d2c3b4a5968778695a4b3c2d1e0f9e8d7c6b5a4938271605f4e3d2c1b0a</password>
+        <email>dan@example.com</email>
+        <purchaseHistory/>
+    </user>
+
+</users>
