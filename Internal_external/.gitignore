@@ -1,0 +1,66 @@
+# =========================
+# Eclipse specific
+# =========================
+.metadata/
+.classpath
+.project
+.settings/
+.loadpath
+.recommenders/
+
+# =========================
+# Java / Build output
+# =========================
+bin/
+build/
+out/
+target/
+
+# Compiled files
+*.class
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS generated files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDE (optional - if you switch IDEs)
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Maven
+# =========================
+dependency-reduced-pom.xml
+
+# =========================
+# Gradle
+# =========================
+.gradle/
+
+# =========================
+# Temp files
+# =========================
+*.tmp
+*.bak
+*.swp
+
+# =========================
+# Web / JSP (important)
+# =========================
+*.war
+*.ear
+
+# =========================
+# Database / local configs
+# =========================
+*.db
+*.sqlite
