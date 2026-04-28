@@ -2,7 +2,7 @@
 Create a servlet that handles user input and displays dynamic content.
 STEP 1 — Create HTML Form (Frontend)
 
-    Create index.html inside WebContent:
+    Create index.html inside webapp:
 
     <!DOCTYPE html>
     <html>

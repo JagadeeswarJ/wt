@@ -18,3 +18,8 @@ select @@version;
 INSERT INTO users (username, password) VALUES
 ('admin', '1234'),
 ('user1', 'pass');
+
+ INSERT INTO books (title, author, price) VALUES
+    ('Java Basics', 'James Gosling', 500),
+    ('Servlet Guide', 'Oracle Docs', 300),
+    ('Web Dev', 'MDN', 400);
