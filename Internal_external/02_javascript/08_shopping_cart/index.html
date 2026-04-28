@@ -1,90 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Shopping Cart</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #f5f5f5; }
-    header { background: #2c3e50; color: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; }
-    header h1 { font-size: 22px; }
-    #cart-count { background: #e74c3c; color: white; padding: 4px 10px; border-radius: 20px; font-size: 13px; cursor: pointer; }
-    .container { max-width: 1000px; margin: 30px auto; padding: 0 15px; display: flex; gap: 20px; }
-    .books { flex: 1; }
-    .books h2 { margin-bottom: 15px; color: #2c3e50; }
-    .book-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
-    .book { background: white; border-radius: 8px; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    .book .icon { font-size: 40px; margin-bottom: 8px; }
-    .book h3 { font-size: 14px; color: #2c3e50; margin-bottom: 4px; }
-    .book .price { color: #e74c3c; font-weight: bold; margin: 6px 0; }
-    .book button { background: #2c3e50; color: white; border: none; padding: 7px 14px; border-radius: 4px; cursor: pointer; font-size: 13px; width: 100%; }
-    .book button:hover { background: #27ae60; }
-    .cart-panel { width: 280px; background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); height: fit-content; }
-    .cart-panel h2 { color: #2c3e50; margin-bottom: 15px; font-size: 18px; }
-    #cart-items { list-style: none; }
-    #cart-items li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; color: #555; }
-    #empty-msg { color: #aaa; font-size: 13px; text-align: center; padding: 20px 0; }
-  </style>
-</head>
-<body>
-<header>
-  <h1>BookStore</h1>
-  <span id="cart-count">Cart: 0 items</span>
-</header>
-<div class="container">
-  <div class="books">
-    <h2>Available Books</h2>
-    <div class="book-list" id="bookList"></div>
-  </div>
-  <div class="cart-panel">
-    <h2>Your Cart</h2>
-    <p id="empty-msg">No items in cart yet.</p>
-    <ul id="cart-items"></ul>
-  </div>
-</div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+      }
+      header {
+        background: #2c3e50;
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      header h1 {
+        font-size: 22px;
+      }
+      #cart-count {
+        background: #e74c3c;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 30px auto;
+        padding: 0 15px;
+        display: flex;
+        gap: 20px;
+      }
+      .books {
+        flex: 1;
+      }
+      .books h2 {
+        margin-bottom: 15px;
+        color: #2c3e50;
+      }
+      .book-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 15px;
+      }
+      .book {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .book .icon {
+        font-size: 40px;
+        margin-bottom: 8px;
+      }
+      .book h3 {
+        font-size: 14px;
+        color: #2c3e50;
+        margin-bottom: 4px;
+      }
+      .book .price {
+        color: #e74c3c;
+        font-weight: bold;
+        margin: 6px 0;
+      }
+      .book button {
+        background: #2c3e50;
+        color: white;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 13px;
+        width: 100%;
+      }
+      .book button:hover {
+        background: #27ae60;
+      }
+      .cart-panel {
+        width: 280px;
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        height: fit-content;
+      }
+      .cart-panel h2 {
+        color: #2c3e50;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+      #cart-items {
+        list-style: none;
+      }
+      #cart-items li {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 13px;
+        color: #555;
+      }
+      #empty-msg {
+        color: #aaa;
+        font-size: 13px;
+        text-align: center;
+        padding: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>BookStore</h1>
+      <span id="cart-count">Cart: 0 items</span>
+    </header>
+    <div class="container">
+      <div class="books">
+        <h2>Available Books</h2>
+        <div class="book-list" id="bookList"></div>
+      </div>
+      <div class="cart-panel">
+        <h2>Your Cart</h2>
+        <p id="empty-msg">No items in cart yet.</p>
+        <ul id="cart-items"></ul>
+      </div>
+    </div>
 
-<script>
-  const books = [
-    { title: "The Alchemist", price: 299, icon: "&#128218;" },
-    { title: "Atomic Habits", price: 399, icon: "&#128214;" },
-    { title: "Sapiens", price: 499, icon: "&#128215;" },
-    { title: "Deep Work", price: 449, icon: "&#128216;" },
-    { title: "1984", price: 280, icon: "&#128217;" },
-    { title: "Rich Dad Poor Dad", price: 349, icon: "&#9733;" }
-  ];
+    <script>
+      const books = [
+        { title: "The Alchemist", price: 299, icon: "&#128218;" },
+        { title: "Atomic Habits", price: 399, icon: "&#128214;" },
+        { title: "Sapiens", price: 499, icon: "&#128215;" },
+        { title: "Deep Work", price: 449, icon: "&#128216;" },
+        { title: "1984", price: 280, icon: "&#128217;" },
+        { title: "Rich Dad Poor Dad", price: 349, icon: "&#9733;" },
+      ];
 
-  const cart = [];
+      const cart = [];
 
-  function renderBooks() {
-    const list = document.getElementById('bookList');
-    list.innerHTML = books.map((b, i) => `
+      function renderBooks() {
+        const list = document.getElementById("bookList");
+        list.innerHTML = books
+          .map(
+            (b, i) => `
       <div class="book">
         <div class="icon">${b.icon}</div>
         <h3>${b.title}</h3>
         <div class="price">&#8377;${b.price}</div>
         <button onclick="addToCart(${i})">Add to Cart</button>
       </div>
-    `).join('');
-  }
+    `,
+          )
+          .join("");
+      }
 
-  function addToCart(i) {
-    cart.push(books[i]);
-    renderCart();
-  }
+      function addToCart(i) {
+        cart.push(books[i]);
+        renderCart();
+      }
 
-  function renderCart() {
-    document.getElementById('cart-count').textContent = `Cart: ${cart.length} items`;
-    const ul = document.getElementById('cart-items');
-    if (cart.length === 0) {
-      document.getElementById('empty-msg').style.display = 'block';
-      ul.innerHTML = '';
-    } else {
-      document.getElementById('empty-msg').style.display = 'none';
-      ul.innerHTML = cart.map(b => `<li><span>${b.title}</span><span>&#8377;${b.price}</span></li>`).join('');
-    }
-  }
+      function renderCart() {
+        document.getElementById("cart-count").textContent =
+          `Cart: ${cart.length} items`;
+        const ul = document.getElementById("cart-items");
+        if (cart.length === 0) {
+          document.getElementById("empty-msg").style.display = "block";
+          ul.innerHTML = "";
+        } else {
+          document.getElementById("empty-msg").style.display = "none";
+          ul.innerHTML = cart
+            .map(
+              (b) =>
+                `<li><span>${b.title}</span><span>&#8377;${b.price}</span></li>`,
+            )
+            .join("");
+        }
+      }
 
-  renderBooks();
-</script>
-</body>
+      renderBooks();
+    </script>
+  </body>
 </html>

@@ -1,101 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Dynamic Book Content</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: #f5f5f5; }
-    header { background: #2c3e50; color: white; padding: 15px 30px; font-size: 22px; font-weight: bold; }
-    .container { display: flex; max-width: 900px; margin: 30px auto; gap: 20px; padding: 0 15px; }
-    .sidebar { width: 200px; background: white; border-radius: 8px; padding: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    .sidebar h3 { font-size: 14px; color: #888; margin-bottom: 12px; text-transform: uppercase; }
-    .book-link {
-      display: block; padding: 10px 12px; margin-bottom: 6px; border-radius: 5px;
-      cursor: pointer; font-size: 14px; color: #2c3e50; background: #f8f8f8;
-      border: 1px solid #eee;
-    }
-    .book-link:hover, .book-link.active { background: #2c3e50; color: white; }
-    .content { flex: 1; background: white; border-radius: 8px; padding: 25px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
-    #detail h2 { color: #2c3e50; margin-bottom: 8px; }
-    #detail .author { color: #e74c3c; font-size: 14px; margin-bottom: 12px; }
-    #detail .price { font-size: 22px; font-weight: bold; color: #27ae60; margin-bottom: 12px; }
-    #detail p { color: #555; line-height: 1.7; font-size: 14px; }
-    #detail .genre { display:inline-block; background:#ecf0f1; padding:4px 10px; border-radius:20px; font-size:12px; color:#555; margin-top:10px; }
-    #placeholder { color: #aaa; font-size: 15px; text-align: center; margin-top: 60px; }
-  </style>
-</head>
-<body>
-<header>BookStore</header>
-<div class="container">
-  <div class="sidebar">
-    <h3>Books</h3>
-    <div class="book-link" onclick="showBook('alchemist', this)">The Alchemist</div>
-    <div class="book-link" onclick="showBook('atomic', this)">Atomic Habits</div>
-    <div class="book-link" onclick="showBook('sapiens', this)">Sapiens</div>
-    <div class="book-link" onclick="showBook('deepwork', this)">Deep Work</div>
-    <div class="book-link" onclick="showBook('1984', this)">1984</div>
-  </div>
-  <div class="content">
-    <div id="placeholder">Click a book to see its details.</div>
-    <div id="detail" style="display:none"></div>
-  </div>
-</div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dynamic Book Content</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+      }
+      header {
+        background: #2c3e50;
+        color: white;
+        padding: 15px 30px;
+        font-size: 22px;
+        font-weight: bold;
+      }
+      .container {
+        display: flex;
+        max-width: 900px;
+        margin: 30px auto;
+        gap: 20px;
+        padding: 0 15px;
+      }
+      .sidebar {
+        width: 200px;
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+      .sidebar h3 {
+        font-size: 14px;
+        color: #888;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+      }
+      .book-link {
+        display: block;
+        padding: 10px 12px;
+        margin-bottom: 6px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #2c3e50;
+        background: #f8f8f8;
+        border: 1px solid #eee;
+      }
+      .book-link:hover,
+      .book-link.active {
+        background: #2c3e50;
+        color: white;
+      }
+      .content {
+        flex: 1;
+        background: white;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+      #detail h2 {
+        color: #2c3e50;
+        margin-bottom: 8px;
+      }
+      #detail .author {
+        color: #e74c3c;
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      #detail .price {
+        font-size: 22px;
+        font-weight: bold;
+        color: #27ae60;
+        margin-bottom: 12px;
+      }
+      #detail p {
+        color: #555;
+        line-height: 1.7;
+        font-size: 14px;
+      }
+      #detail .genre {
+        display: inline-block;
+        background: #ecf0f1;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        color: #555;
+        margin-top: 10px;
+      }
+      #placeholder {
+        color: #aaa;
+        font-size: 15px;
+        text-align: center;
+        margin-top: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>BookStore</header>
+    <div class="container">
+      <div class="sidebar">
+        <h3>Books</h3>
+        <div class="book-link" onclick="showBook('alchemist', this)">
+          The Alchemist
+        </div>
+        <div class="book-link" onclick="showBook('atomic', this)">
+          Atomic Habits
+        </div>
+        <div class="book-link" onclick="showBook('sapiens', this)">Sapiens</div>
+        <div class="book-link" onclick="showBook('deepwork', this)">
+          Deep Work
+        </div>
+        <div class="book-link" onclick="showBook('1984', this)">1984</div>
+      </div>
+      <div class="content">
+        <div id="placeholder">Click a book to see its details.</div>
+        <div id="detail" style="display: none"></div>
+      </div>
+    </div>
 
-<script>
-  const books = {
-    alchemist: {
-      title: "The Alchemist",
-      author: "Paulo Coelho",
-      price: "&#8377;299",
-      genre: "Fiction",
-      desc: "A philosophical novel about a young Andalusian shepherd who yearns to travel in search of a worldly treasure. His journey teaches him the importance of following one's dream."
-    },
-    atomic: {
-      title: "Atomic Habits",
-      author: "James Clear",
-      price: "&#8377;399",
-      genre: "Self Help",
-      desc: "A proven framework for improving every day. Learn how tiny changes can lead to remarkable results using the concept of atomic habits and the aggregation of marginal gains."
-    },
-    sapiens: {
-      title: "Sapiens",
-      author: "Yuval Noah Harari",
-      price: "&#8377;499",
-      genre: "History",
-      desc: "A brief history of humankind, tracing the ways in which biology and history have defined us. From the Stone Age to the modern era, this book explores how Homo sapiens came to rule the world."
-    },
-    deepwork: {
-      title: "Deep Work",
-      author: "Cal Newport",
-      price: "&#8377;449",
-      genre: "Self Help",
-      desc: "Rules for focused success in a distracted world. Deep work is the ability to focus without distraction on a cognitively demanding task — a skill that is increasingly rare and valuable."
-    },
-    "1984": {
-      title: "1984",
-      author: "George Orwell",
-      price: "&#8377;280",
-      genre: "Dystopian Fiction",
-      desc: "A dystopian novel set in Airstrip One, formerly Great Britain, a province of the superstate Oceania. It depicts a totalitarian society where Big Brother watches everyone."
-    }
-  };
+    <script>
+      const books = {
+        alchemist: {
+          title: "The Alchemist",
+          author: "Paulo Coelho",
+          price: "&#8377;299",
+          genre: "Fiction",
+          desc: "A philosophical novel about a young Andalusian shepherd who yearns to travel in search of a worldly treasure. His journey teaches him the importance of following one's dream.",
+        },
+        atomic: {
+          title: "Atomic Habits",
+          author: "James Clear",
+          price: "&#8377;399",
+          genre: "Self Help",
+          desc: "A proven framework for improving every day. Learn how tiny changes can lead to remarkable results using the concept of atomic habits and the aggregation of marginal gains.",
+        },
+        sapiens: {
+          title: "Sapiens",
+          author: "Yuval Noah Harari",
+          price: "&#8377;499",
+          genre: "History",
+          desc: "A brief history of humankind, tracing the ways in which biology and history have defined us. From the Stone Age to the modern era, this book explores how Homo sapiens came to rule the world.",
+        },
+        deepwork: {
+          title: "Deep Work",
+          author: "Cal Newport",
+          price: "&#8377;449",
+          genre: "Self Help",
+          desc: "Rules for focused success in a distracted world. Deep work is the ability to focus without distraction on a cognitively demanding task — a skill that is increasingly rare and valuable.",
+        },
+        1984: {
+          title: "1984",
+          author: "George Orwell",
+          price: "&#8377;280",
+          genre: "Dystopian Fiction",
+          desc: "A dystopian novel set in Airstrip One, formerly Great Britain, a province of the superstate Oceania. It depicts a totalitarian society where Big Brother watches everyone.",
+        },
+      };
 
-  function showBook(key, el) {
-    document.querySelectorAll('.book-link').forEach(e => e.classList.remove('active'));
-    el.classList.add('active');
-    const b = books[key];
-    document.getElementById('placeholder').style.display = 'none';
-    const d = document.getElementById('detail');
-    d.style.display = 'block';
-    d.innerHTML = `
-      <h2>${b.title}</h2>
-      <div class="author">by ${b.author}</div>
-      <div class="price">${b.price}</div>
-      <p>${b.desc}</p>
-      <span class="genre">${b.genre}</span>
+      function showBook(key, el) {
+        document
+          .querySelectorAll(".book-link")
+          .forEach((e) => e.classList.remove("active"));
+        el.classList.add("active");
+        const b = books[key];
+        document.getElementById("placeholder").style.display = "none";
+        const d = document.getElementById("detail");
+        d.style.display = "block";
+        d.innerHTML = `
+            <h2>${b.title}</h2>
+            <div class="author">by ${b.author}</div>
+            <div class="price">${b.price}</div>
+            <p>${b.desc}</p>
+            <span class="genre">${b.genre}</span>
     `;
-  }
-</script>
-</body>
+      }
+    </script>
+  </body>
 </html>
