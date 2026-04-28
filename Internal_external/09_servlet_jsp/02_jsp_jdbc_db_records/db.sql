@@ -23,3 +23,6 @@ INSERT INTO users (username, password) VALUES
     ('Java Basics', 'James Gosling', 500),
     ('Servlet Guide', 'Oracle Docs', 300),
     ('Web Dev', 'MDN', 400);
+
+ 
+ select * from books;
