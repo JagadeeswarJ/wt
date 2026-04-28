@@ -30,5 +30,9 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:noNamespaceSchemaLocation="book_catalog.xsd"
 ```
 
-## Validate in VS Code
-Install **XML extension by Red Hat** → it auto-validates XML against XSD and shows errors.
+## How to Run
+1. Open both files in **VS Code**
+2. Install extension: **XML by Red Hat** (if not already)
+3. Open `book_catalog.xml` → VS Code auto-validates against the XSD
+4. Any violation (wrong value, missing attribute) shows as a red underline
+5. To test: change an `<availability>` value to something not in the enum → see error

@@ -5,8 +5,11 @@ Validate XML structure using an inline Document Type Definition (DTD).
 ## File
 - `book_catalog.xml` — XML with inline DTD
 
-## How to Open
-Open in VS Code (with XML extension) to see validation.
+## How to Run
+1. Open `book_catalog.xml` in **VS Code**
+2. Install extension: **XML by Red Hat** (if not already installed)
+3. VS Code will auto-validate and underline any DTD violations in red
+4. Intentionally break a rule (e.g. remove required attribute) to see the error
 
 ## How DTD Works
 DTD is declared inside the XML file itself:

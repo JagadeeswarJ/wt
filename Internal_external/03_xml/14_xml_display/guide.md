@@ -6,9 +6,15 @@ Parse and display XML data in an HTML table using JavaScript.
 - `index.html` — HTML page + JavaScript to parse and display XML
 - `books.xml` — XML data source
 
-## How to Open
-Open `index.html` in a browser.
-> Note: Chrome blocks local file fetch. Use Firefox, or run via a local server (VS Code Live Server extension).
+## How to Run
+**Option A — Firefox (easiest):**
+1. Double-click `index.html` → opens in Firefox → works directly
+
+**Option B — VS Code Live Server:**
+1. Right-click `index.html` in VS Code → **Open with Live Server**
+2. Opens at `http://127.0.0.1:5500/index.html` → fetch works in Chrome too
+
+> Chrome blocks `fetch()` on local files (`file://`). Use Firefox or Live Server.
 
 ## How It Works
 1. `fetch('books.xml')` tries to load the XML file

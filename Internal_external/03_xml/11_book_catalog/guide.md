@@ -5,8 +5,10 @@ Design an XML structure to represent a catalog of books.
 ## File
 - `book_catalog.xml` — 6 books with structured data
 
-## How to Open
-Open in any browser or VS Code. Browser shows the raw XML tree.
+## How to Run
+1. Double-click `book_catalog.xml` → opens in browser as a collapsible XML tree
+2. Or open in VS Code to read/edit the structure
+3. No compilation or server needed
 
 ## Structure
 ```xml
