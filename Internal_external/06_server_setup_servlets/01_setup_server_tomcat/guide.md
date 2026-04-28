@@ -1,63 +1,52 @@
-Install and configure Apache Tomcat server in Eclipse IDE. 
-STEP 1 — Install Tomcat
-    1. Download
-    Go to: https://tomcat.apache.org
-    Download:
-    Tomcat 9 (recommended for labs)
-    2. Extract
-    Extract ZIP to:
-    C:\apache-tomcat-9
+# Week 7 — Install & Configure Apache Tomcat in Eclipse
 
-STEP 2 — Verify Tomcat (important)
-    Before touching Eclipse, check if Tomcat works standalone.
-    Run:
-    C:\apache-tomcat-9\bin\startup.bat
-    Then open:
-    http://localhost:8080
+---
 
-STEP 3 — Configure in Eclipse
-    1. Open Eclipse
+## Step 1 — Download Tomcat
 
-    Make sure you installed:
+- Go to: https://tomcat.apache.org
+- Download **Tomcat 9** → Binary Distribution → ZIP
+- Extract to: `C:\apache-tomcat-9`
 
-    Eclipse IDE for Enterprise Java / Dynamic Web
-    2. Add Server
+---
 
-    Go to:
+## Step 2 — Verify Tomcat Standalone
 
-    Window → Show View → Servers
+Before touching Eclipse, confirm Tomcat works on its own.
 
-    Then:
+Run:
+```
+C:\apache-tomcat-9\bin\startup.bat
+```
 
-    Right Click → New → Server
+Open browser → `http://localhost:8080`
+You should see the Tomcat welcome page.
 
-    Select:
+---
 
-    Apache → Tomcat v9.0 Server
+## Step 3 — Add Tomcat to Eclipse
 
-    Click Next
+1. **Window → Show View → Servers**
+2. In the Servers tab → right-click → **New → Server**
+3. Select **Apache → Tomcat v9.0 Server** → Next
+4. Set **Tomcat installation directory** → `C:\apache-tomcat-9`
+5. Click **Finish**
 
-    3. Link Tomcat Directory
+---
 
-    Set:
+## Step 4 — Start Server from Eclipse
 
-    Tomcat installation directory → C:\apache-tomcat-9
+In the Servers tab → right-click Tomcat → **Start**
 
-    Click Finish
-STEP 4 — Start Server
+Watch the Console at the bottom:
+```
+Server startup in XXXX ms
+```
 
-    In Servers tab:
+---
 
-    Right click → Start
+## Step 5 — Verify
 
-    Watch console:
+Open browser → `http://localhost:8080`
 
-    Server startup in XXXX ms
-    
-STEP 5 — Verify inside Eclipse
-
-    Open browser:
-
-    http://localhost:8080
-
-    Same Tomcat page should load.
+Same Tomcat page should load — Tomcat is now configured in Eclipse.

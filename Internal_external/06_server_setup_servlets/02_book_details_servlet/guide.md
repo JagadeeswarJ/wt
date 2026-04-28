@@ -1,163 +1,182 @@
-Develop a servlet to display book details retrieved from a database
-STEP 1 — Create Database (MySQL)
-    Create DB + Table
-    CREATE DATABASE bookstore;
+# Week 8 — Servlet to Display Book Details from Database
 
-    USE bookstore;
+Develop a servlet that retrieves book information from a database and displays it.
 
-    CREATE TABLE books (
-        id INT PRIMARY KEY AUTO_INCREMENT,
-        title VARCHAR(100),
-        author VARCHAR(100),
-        price DOUBLE
-    );
+---
 
-    INSERT INTO books (title, author, price) VALUES
-    ('Java Basics', 'James Gosling', 500),
-    ('Servlet Guide', 'Oracle Docs', 300),
-    ('Web Dev', 'MDN', 400);
+## Step 1 — Create MySQL Database
 
-STEP 2 — Create Dynamic Web Project in Eclipse IDE
-    File → New → Dynamic Web Project
-    Name: BookStoreApp
-    Target Runtime: Select your Apache Tomcat
-    Finish
+```sql
+CREATE DATABASE IF NOT EXISTS bookstore;
+USE bookstore;
 
-STEP 3 — Add MySQL Connector (JDBC Driver)
+CREATE TABLE books (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    price DOUBLE
+);
 
-    Download:
-
-    mysql-connector-j.jar
-
-    Add to project:
-
-    Right click project → Build Path → Add External JAR
-
-STEP 4 — Create Servlet
-    Path:
-    src → New → Servlet → BookServlet
-
-STEP 5 — Write Servlet Code
-    import java.io.*;
-    import java.sql.*;
-    import javax.servlet.*;
-    import javax.servlet.http.*;
-
-    public class BookServlet extends HttpServlet {
-
-        protected void doGet(HttpServletRequest request, HttpServletResponse response)
-                throws ServletException, IOException {
-
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-
-            out.println("<h2>Book List</h2>");
-
-            try {
-                // 1. Load driver
-                Class.forName("com.mysql.cj.jdbc.Driver");
-
-                // 2. Connect DB
-                Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/bookstore",
-                    "root",
-                    "password"
-                );
-
-                // 3. Query
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT * FROM books");
-
-                // 4. Display
-                while (rs.next()) {
-                    out.println("<p>");
-                    out.println("ID: " + rs.getInt("id") + "<br>");
-                    out.println("Title: " + rs.getString("title") + "<br>");
-                    out.println("Author: " + rs.getString("author") + "<br>");
-                    out.println("Price: " + rs.getDouble("price"));
-                    out.println("</p><hr>");
-                }
-
-                con.close();
-
-            } catch (Exception e) {
-                out.println("Error: " + e.getMessage());
-            }
-        }
-    }
-
-STEP 6 — Configure URL Mapping
-
-    web.xml
-    <servlet>
-        <servlet-name>BookServlet</servlet-name>
-        <servlet-class>BookServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>BookServlet</servlet-name>
-        <url-pattern>/books</url-pattern>
-    </servlet-mapping>
-
-STEP 7 - Run Project
-    Right click project → Run on Server
-    Open:
-    http://localhost:8080/BookStoreApp/books
-
-
-pom.xml
+INSERT INTO books (title, author, price) VALUES
+('The Alchemist', 'Paulo Coelho', 299),
+('Atomic Habits', 'James Clear', 399),
+('Sapiens', 'Yuval Noah Harari', 499);
 ```
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+---
+
+## Step 2 — Create Maven Dynamic Web Project in Eclipse
+
+1. **File → New → Dynamic Web Project**
+2. Fill in:
+   - **Project name:** `BookStoreApp`
+   - **Target runtime:** Apache Tomcat 9.x
+3. Click **Next → Next**
+4. Check **"Generate web.xml deployment descriptor"**
+5. Click **Finish**
+
+---
+
+## Step 3 — Configure pom.xml
+
+Open `pom.xml` → click the **pom.xml** tab → replace all content with:
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
   <modelVersion>4.0.0</modelVersion>
-  <groupId>BookStoreAppDb</groupId>
-  <artifactId>BookStoreAppDb</artifactId>
+  <groupId>com.bookstore</groupId>
+  <artifactId>BookStoreApp</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+  </properties>
 
-    <dependencies>
+  <dependencies>
 
-        <!-- Servlet API (Tomcat 9 → javax) -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-            <scope>provided</scope>
-        </dependency>
+    <!-- Servlet API (Tomcat 9 uses javax) -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
 
-        <!-- MySQL JDBC Driver -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version>
-        </dependency>
+    <!-- MySQL JDBC Driver -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
+    </dependency>
 
-    </dependencies>
+  </dependencies>
 
-    <build>
-        <finalName>BookStoreApp</finalName>
+  <build>
+    <finalName>BookStoreApp</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.4.0</version>
+      </plugin>
+    </plugins>
+  </build>
 
-        <plugins>
-
-            <!-- Compiler -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
-            </plugin>
-
-            <!-- WAR Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
-            </plugin>
-
-        </plugins>
-    </build>
 </project>
+```
+
+**Save (Ctrl+S)** — Eclipse downloads dependencies automatically.
+
+---
+
+## Step 4 — Create Package and Servlet
+
+1. Right-click `src/main/java` → **New → Package** → name it `com.bookstore`
+2. Right-click `com.bookstore` → **New → Class** → name it `BookServlet`
+
+### BookServlet.java
+
+```java
+package com.bookstore;
+
+import java.io.*;
+import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+
+@WebServlet("/books")
+public class BookServlet extends HttpServlet {
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<html><body style='font-family:Arial;padding:30px'>");
+        out.println("<h2>Book List</h2>");
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/bookstore", "root", "root");
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM books");
+
+            out.println("<table border='1' cellpadding='8'>");
+            out.println("<tr><th>ID</th><th>Title</th><th>Author</th><th>Price</th></tr>");
+
+            while (rs.next()) {
+                out.println("<tr>");
+                out.println("<td>" + rs.getInt("id") + "</td>");
+                out.println("<td>" + rs.getString("title") + "</td>");
+                out.println("<td>" + rs.getString("author") + "</td>");
+                out.println("<td>Rs. " + rs.getDouble("price") + "</td>");
+                out.println("</tr>");
+            }
+
+            out.println("</table>");
+            con.close();
+
+        } catch (Exception e) {
+            out.println("<p>Error: " + e.getMessage() + "</p>");
+        }
+
+        out.println("</body></html>");
+    }
+}
+```
+
+---
+
+## Step 5 — Run
+
+Right-click project → **Run As → Run on Server** → select Tomcat 9 → Finish
+
+Open browser:
+```
+http://localhost:8080/BookStoreApp/books
+```
+
+---
+
+## Project Structure
+
+```
+BookStoreApp/
+  src/main/java/com/bookstore/
+    BookServlet.java
+  src/main/webapp/
+    WEB-INF/
+      web.xml
+  pom.xml
 ```
