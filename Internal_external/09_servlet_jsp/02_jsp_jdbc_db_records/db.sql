@@ -26,3 +26,5 @@ INSERT INTO users (username, password) VALUES
 
  
  select * from books;
+ 
+ show databases;
